@@ -2,11 +2,11 @@ import { createContext, useState, useEffect } from "react";
 
 import { getCategoriesAndDocuments } from "../utils/firebase/firebase.utils";
 
-export const ProductsContext = createContext({
-  products: [],
+export const CategoriesContext = createContext({
+  categoriesMap: {},
 });
-export const ProductsProvider = ({ children }) => {
-  const [products, setProducts] = useState([]);
+export const CategoriesProvider = ({ children }) => {
+  const [categoriesMap, setCategoriesMap] = useState({});
 
   useEffect(() => {
     const getCategoriesMap = async () => {
@@ -16,10 +16,10 @@ export const ProductsProvider = ({ children }) => {
     getCategoriesMap();
   });
 
-  const value = { products };
+  const value = { categoriesMap };
   return (
-    <ProductsContext.Provider value={value}>
+    <CategoriesContext.Provider value={value}>
       {children}
-    </ProductsContext.Provider>
+    </CategoriesContext.Provider>
   );
 };
